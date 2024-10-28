@@ -1,6 +1,6 @@
 const config = {
-    botName: "NexusCoders Bot",
-    ownerNumber: "2347075663318@s.whatsapp.net",
+    botName: "NexusCoders-MD",
+    ownerNumber: "2348121662697@s.whatsapp.net",
     database: {
         uri: "mongodb+srv://mateochatbot:xdtL2bYQ9eV3CeXM@gerald.r2hjy.mongodb.net/nexusbot?retryWrites=true&w=majority",
         options: {
@@ -14,14 +14,14 @@ const config = {
     bot: {
         name: "NexusCoders Bot",
         version: "2.0.0",
-        prefix: "!",
+        prefix: "?",
         sessionName: "nexus-session",
-        ownerNumber: ["2347075663318@s.whatsapp.net"],
+        ownerNumber: ["2348121662697@s.whatsapp.net"],
         ownerName: "NexusCoders",
         language: "en",
-        timezone: "Asia/Kolkata",
+        timezone: "Africa/Lagos",
         homePage: "https://nexuscoders.com",
-        autoRead: true,
+        autoRead: false,
         selfBot: false,
         maxFileSize: 100,
         supportGroups: ["SUPPORT_GROUP_ID@g.us"],
@@ -36,13 +36,13 @@ const config = {
     },
     features: {
         antiLink: {
-            enabled: true,
+            enabled: false,
             whitelist: [],
             action: "kick",
             warningMessage: true
         },
         antiSpam: {
-            enabled: false,
+            enabled: true,
             maxMessages: 7,
             interval: 10000,
             action: "warn"
@@ -57,7 +57,7 @@ const config = {
             }
         },
         presence: {
-            autoTyping: true,
+            autoTyping: false,
             autoRecord: false,
             autoOnline: true
         },
@@ -108,7 +108,7 @@ const config = {
     },
     messages: {
         commands: {
-            notFound: "Command not found. Type !help for command list.",
+            notFound: "Command not found. Type ?help for command list.",
             adminOnly: "This command is for admins only!",
             ownerOnly: "This command is for bot owner only!",
             groupOnly: "This command can only be used in groups!",
