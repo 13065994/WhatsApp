@@ -16,8 +16,7 @@ module.exports = {
         if (!quotedMsg || !quotedMsg.participant) {
             await sock.sendMessage(chatId, {
                 text: '❌ Please reply to a message you want me to unsend.',
-                quoted: message
-            });
+                }, { quoted: message });
             return;
         }
 
@@ -26,8 +25,7 @@ module.exports = {
         if (quotedMsg.participant !== botNumber) {
             await sock.sendMessage(chatId, {
                 text: '❌ I can only unsend my own messages.',
-                quoted: message
-            });
+                }, { quoted: message });
             return;
         }
 
@@ -43,8 +41,7 @@ module.exports = {
             
             await sock.sendMessage(chatId, {
                 text: '✅ Message deleted successfully.',
-                quoted: message
-            }).then(async (sentMsg) => {
+                }, { quoted: message }).then(async (sentMsg) => {
                 setTimeout(async () => {
                     await sock.sendMessage(chatId, { 
                         delete: {
@@ -60,8 +57,7 @@ module.exports = {
             logger.error('Error in unsend command:', error);
             await sock.sendMessage(chatId, {
                 text: '❌ Failed to delete the message. Make sure it\'s not too old.',
-                quoted: message
-            });
+                }, { quoted: message });
         }
     },
 
