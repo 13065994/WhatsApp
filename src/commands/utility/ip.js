@@ -27,8 +27,7 @@ module.exports = {
             if (args.length < 1) {
                 await sock.sendMessage(chatId, {
                     text: '⚠️ 𝙥𝙡𝙚𝙖𝙨𝙚 𝙥𝙧𝙤𝙫𝙞𝙙𝙚 𝙩𝙝𝙚 𝙄𝙥 𝙖𝙙𝙙𝙧𝙚𝙨𝙨!\nUsage: !ip <ip_address>',
-                    quoted: message
-                });
+                    }, { quoted: message });
                 return;
             }
 
@@ -39,8 +38,7 @@ module.exports = {
             if (!ipRegex.test(ipAddress)) {
                 await sock.sendMessage(chatId, {
                     text: '⚠️ 𝙏𝙝𝙚 𝙞𝙥 𝙖𝙙𝙙𝙧𝙚𝙨𝙨 𝙮𝙤𝙪 𝙝𝙖𝙫𝙚 𝙥𝙧𝙤𝙫𝙞𝙙𝙚𝙙 𝙨𝙚𝙚𝙢𝙨 𝙞𝙣𝙫𝙖𝙡𝙞𝙙 .',
-                    quoted: message
-                });
+                    }, { quoted: message });
                 return;
             }
 
@@ -74,8 +72,7 @@ module.exports = {
             // Send response
             await sock.sendMessage(chatId, {
                 text: infoMessage,
-                quoted: message
-            });
+                }, { quoted: message });
 
             // Update user statistics
             await user.updateOne({
@@ -86,8 +83,7 @@ module.exports = {
             logger.error(`Error in IP lookup command:`, error);
             await sock.sendMessage(chatId, {
                 text: '❌ An error occurred while fetching IP information. Please try again later.',
-                quoted: message
-            });
+                }, { quoted: message });
         }
     }
 };
