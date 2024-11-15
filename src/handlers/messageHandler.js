@@ -42,7 +42,9 @@ async function handleMessage(sock, message) {
         const sender = message.key.participant || message.key.remoteJid;
 
         if (handleSpam(sender, sock)) {
-            await sock.sendMessage(jid, { text: '⚠️ Please slow down! You are sending messages too quickly.' });
+            await sock.sendMessage(jid, { 
+  text: '⚠️ Please slow down! You are sending messages too quickly.' 
+   }, { quoted: message });
             return;
         }
 
@@ -70,7 +72,7 @@ async function handleMessage(sock, message) {
         if (messageText === config.bot.prefix) {
             await sock.sendMessage(jid, { 
                 text: `👋 Hi! I'm NexusCoders Bot V2\nPrefix: *${config.bot.prefix}*\nUse *${config.bot.prefix}menu* to see available commands!` 
-            });
+            }, { quoted: message });
             return;
         }
 
