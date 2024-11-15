@@ -1,4 +1,4 @@
-const fetch = require('node-fetch'); // Ensure node-fetch is installed
+const fetch = require('node-fetch');
 
 module.exports = {
     name: 'pickup',
