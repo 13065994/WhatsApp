@@ -41,7 +41,6 @@ module.exports = {
             caption: nexusInfo,
             footer: '© NexusCoders Team',
             buttons: buttons,
-            quoted: message
-        });
+        }, { quoted: message });
     }
 };
