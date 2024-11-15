@@ -11,7 +11,7 @@ module.exports = {
         if (!args.length) {
             return await sock.sendMessage(message.key.remoteJid, {
                 text: '❌ Please provide an artist name or use "random"!'
-            });
+            }, { quoted: message });
         }
 
         const query = args.join(" ").toLowerCase();
@@ -74,7 +74,7 @@ module.exports = {
             try {
                 await sock.sendMessage(message.key.remoteJid, {
                     text: `🔎 Searching for artist "${searchQuery}"...`
-                });
+                }, { quoted: message });
 
                 const artist = await getArtistInfo(searchQuery);
                 
@@ -121,7 +121,7 @@ module.exports = {
             try {
                 await sock.sendMessage(message.key.remoteJid, {
                     text: "🎲 Finding a random artist..."
-                });
+                }, { quoted: message });
 
                 const token = await getSpotifyToken();
                 const randomChar = String.fromCharCode(97 + Math.floor(Math.random() * 26));
@@ -158,7 +158,7 @@ module.exports = {
         } catch (error) {
             await sock.sendMessage(message.key.remoteJid, {
                 text: `❌ Error: ${error.message}`
-            });
+            }, { quoted: message });
         }
     }
 };
