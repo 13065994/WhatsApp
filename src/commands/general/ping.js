@@ -8,7 +8,7 @@ module.exports = {
         
         const msg = await sock.sendMessage(message.key.remoteJid, {
             text: '🏓 Pinging...'
-        });
+        }, { quoted: message });
         
         const latency = Date.now() - start;
         
