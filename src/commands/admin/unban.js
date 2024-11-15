@@ -18,7 +18,11 @@ module.exports = {
 
     if (mentions.length === 0) {
 
-      await sock.sendMessage(message.key.remoteJid, { text: '❌ Please mention a user to unban' });
+      await sock.sendMessage(message.key.remoteJid, { 
+     
+    text: '❌ Please mention a user to unban' 
+      
+     }, { quoted: message });
 
       return;
 
@@ -32,7 +36,11 @@ module.exports = {
 
     if (!user) {
 
-      await sock.sendMessage(message.key.remoteJid, { text: '❌ User not found in database' });
+      await sock.sendMessage(message.key.remoteJid, { 
+    
+text: '❌ User not found in database' 
+
+        }, { quoted: message });
 
       return;
 
@@ -40,7 +48,11 @@ module.exports = {
 
     if (!user.isBanned) {
 
-      await sock.sendMessage(message.key.remoteJid, { text: '❌ User is not banned' });
+      await sock.sendMessage(message.key.remoteJid, { 
+
+   text: '❌ User is not banned' 
+
+      }, { quoted: message });
 
       return;
 
@@ -54,7 +66,7 @@ module.exports = {
 
       mentions: [targetId] 
 
-    });
+    }, { quoted: message });
 
     try {
 
@@ -62,7 +74,7 @@ module.exports = {
 
         text: `You have been unbanned from using the bot.\nReason: ${reason}` 
 
-      });
+      }, { quoted: message });
 
     } catch (error) {}
 
