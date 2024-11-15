@@ -20,8 +20,7 @@ module.exports = {
             if (args.length < 1) {
                 await sock.sendMessage(chatId, {
                     text: `Current mode: ${config.bot.publicMode ? 'Public' : 'Private'}\nUse: ${this.usage}`,
-                    quoted: message
-                });
+                    }, { quoted: message });
                 return;
             }
 
@@ -30,8 +29,7 @@ module.exports = {
             if (mode !== 'public' && mode !== 'private') {
                 await sock.sendMessage(chatId, {
                     text: `Invalid mode! Use 'public' or 'private'`,
-                    quoted: message
-                });
+                    }, { quoted: message });
                 return;
             }
 
@@ -44,14 +42,12 @@ module.exports = {
 
             await sock.sendMessage(chatId, {
                 text: response,
-                quoted: message
-            });
+                }, { quoted: message });
 
         } catch (error) {
             await sock.sendMessage(message.key.remoteJid, {
                 text: '❌ An error occurred while changing bot mode.',
-                quoted: message
-            });
+                }, { quoted: message });
         }
     }
 }
