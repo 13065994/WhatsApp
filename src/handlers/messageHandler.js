@@ -40,7 +40,7 @@ async function handleMessage(sock, message) {
         const jid = message.key.remoteJid;
         if (!jid) return;
         const sender = message.key.participant || message.key.remoteJid;
-        
+
         if (handleSpam(sender, sock)) {
             await sock.sendMessage(jid, { text: '⚠️ Please slow down! You are sending messages too quickly.' });
             return;
@@ -59,6 +59,13 @@ async function handleMessage(sock, message) {
         }
 
         if (!messageText) return;
+
+        if (messageText.toLowerCase() === 'prefix') {
+  await sock.sendMessage(jid, { 
+    text: `┌\n📲𝐁𝐎𝐓 𝐏𝐑𝐄𝐅𝐈𝐗: ${config.bot.prefix}\n                ┘`
+  }, { quoted: message });
+  return;
+}
 
         if (messageText === config.bot.prefix) {
             await sock.sendMessage(jid, { 
@@ -79,7 +86,7 @@ async function handleMessage(sock, message) {
         }
 
         const [command, ...args] = messageText.slice(config.bot.prefix.length).trim().split(' ');
-        
+
         if (command) {
             await executeCommand(sock, message, command.toLowerCase(), args);
         }
@@ -129,7 +136,7 @@ async function handleGroupUpdate(sock, update) {
     try {
         const { id, subject, desc, restrict, announce } = update;
         if (!id) return;
-        
+
         const updates = {};
         let hasUpdates = false;
 
@@ -138,7 +145,7 @@ async function handleGroupUpdate(sock, update) {
             hasUpdates = true;
             await eventHandler.handleEvent('groupSubjectUpdate', sock, id, subject);
         }
-        
+
         if (desc !== undefined) {
             updates.desc = desc;
             hasUpdates = true;
