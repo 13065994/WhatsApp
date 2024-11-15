@@ -16,8 +16,7 @@ module.exports = {
         if (!categories.includes(category)) {
             await sock.sendMessage(chatId, {
                 text: `Available categories:\n${categories.join(', ')}\n\nUsage: !quiz [category]`,
-                quoted: message
-            });
+                }, { quoted: message });
             return;
         }
 
@@ -31,8 +30,7 @@ module.exports = {
 
                 quizMessage = await sock.sendMessage(chatId, {
                     text: `📚 TRUE OR FALSE\n\n${data.question}\n\nReply with 'true' or 'false'`,
-                    quoted: message
-                });
+                    }, { quoted: message });
 
                 await user.updateOne({
                     replyCommandName: this.name,
@@ -54,8 +52,7 @@ module.exports = {
                 quizMessage = await sock.sendMessage(chatId, {
                     image: { url: data.photoUrl },
                     caption: `📚 ANIME QUIZ\n\nWho is this character?\n\nReply with the character's name`,
-                    quoted: message
-                });
+                    }, { quoted: message });
 
                 await user.updateOne({
                     replyCommandName: this.name,
@@ -120,8 +117,7 @@ module.exports = {
         } catch (error) {
             await sock.sendMessage(chatId, {
                 text: `Error: Could not fetch quiz for category ${category}. Please try again.`,
-                quoted: message
-            });
+                }, { quoted: message });
         }
     },
 
@@ -161,8 +157,7 @@ module.exports = {
             text: isCorrect 
                 ? "🎉 CORRECT!\n\nCongratulations! You've won 10000 coins!"
                 : `❌ WRONG!\n\nThe correct answer was: ${correctAnswer}`,
-            quoted: message
-        });
+            }, { quoted: message });
 
         if (isCorrect) {
             await user.updateOne({
