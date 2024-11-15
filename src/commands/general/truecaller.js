@@ -29,8 +29,7 @@ module.exports = {
             if (args.length < 1 && !quotedMsg) {
                 await sock.sendMessage(chatId, {
                     text: '⚠️ Please provide a phone number or quote a message containing a phone number!',
-                    quoted: message
-                });
+                    }, { quoted: message });
                 return;
             }
 
@@ -47,8 +46,7 @@ module.exports = {
             if (!phoneNumber || phoneNumber.length < 10) {
                 await sock.sendMessage(chatId, {
                     text: '⚠️ Invalid phone number format!',
-                    quoted: message
-                });
+                    }, { quoted: message });
                 return;
             }
 
@@ -75,8 +73,7 @@ module.exports = {
 
             await sock.sendMessage(chatId, {
                 text: numberInfo,
-                quoted: message
-            });
+                }, { quoted: message });
 
             await user.updateOne({
                 $inc: { 'statistics.commandUsage': 1 }
@@ -91,8 +88,7 @@ module.exports = {
                 
             await sock.sendMessage(chatId, {
                 text: errorMessage,
-                quoted: message
-            });
+                }, { quoted: message });
         }
     }
 }
