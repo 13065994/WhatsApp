@@ -11,15 +11,13 @@ module.exports = {
         if (!args.length) {
             await sock.sendMessage(message.key.remoteJid, { 
                 text: '❌ Please provide a question or message for the AI',
-                quoted: message 
-            });
+                }, { quoted: message });
             return;
         }
 
         const thinking = await sock.sendMessage(message.key.remoteJid, { 
             text: '🤖 Thinking...',
-            quoted: message 
-        });
+            }, { quoted: message });
 
         try {
             const prompt = args.join(' ');
