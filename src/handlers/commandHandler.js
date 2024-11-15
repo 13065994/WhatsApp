@@ -69,8 +69,7 @@ const handleCooldown = async (sock, message, command) => {
             const timeLeft = (expirationTime - Date.now()) / 1000;
             await sock.sendMessage(message.key.remoteJid, { 
                 text: `⏳ Please wait ${timeLeft.toFixed(1)} seconds before using ${command.name} again.`,
-                quoted: message 
-            });
+                }, { quoted: message });
             return false;
         }
     }
@@ -85,8 +84,7 @@ const executeCommand = async (sock, message, command, args) => {
     if (!resolvedCommand) {
         await sock.sendMessage(message.key.remoteJid, {
             text: `❌ Command *${command}* does not exist in NexusCoders Bot.\nType *${config.bot.prefix}menu* to see available commands.`,
-            quoted: message
-        });
+            }, { quoted: message });
         return;
     }
 
@@ -97,8 +95,7 @@ const executeCommand = async (sock, message, command, args) => {
     } else if (!config.bot.publicMode && config.bot.privateMode && !isOwner(participant)) {
         await sock.sendMessage(message.key.remoteJid, { 
             text: '🔒 This bot is currently in private mode. Only the owner can use it.',
-            quoted: message 
-        });
+            }, { quoted: message });
         return;
     }
 
@@ -141,8 +138,7 @@ const executeCommand = async (sock, message, command, args) => {
         if (!isBotAdmin) {
             await sock.sendMessage(message.key.remoteJid, { 
                 text: config.messages.commands.botAdminRequired,
-                quoted: message 
-            });
+                }, { quoted: message });
             return;
         }
     }
@@ -158,8 +154,7 @@ const executeCommand = async (sock, message, command, args) => {
             if (didLevelUp) {
                 await sock.sendMessage(message.key.remoteJid, { 
                     text: `🎉 Congratulations! You've reached level ${user.level}!`,
-                    quoted: message 
-                });
+                    }, { quoted: message });
             }
         }
 
@@ -174,8 +169,7 @@ const executeCommand = async (sock, message, command, args) => {
         logger.error(`Command execution error (${command}):`, error);
         await sock.sendMessage(message.key.remoteJid, { 
             text: config.messages.commands.error,
-            quoted: message 
-        });
+            }, { quoted: message });
     }
 };
 
