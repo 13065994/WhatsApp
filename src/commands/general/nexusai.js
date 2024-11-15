@@ -32,13 +32,9 @@ module.exports = {
 
     }
 
-    // Initialize conversation
-
     user.conversationStarted = true;
 
     await user.save();
-
-    // Process message
 
     await this.processMessage(sock, message, args, user, quotedMsg);
 
@@ -51,8 +47,6 @@ module.exports = {
     const chatId = message.key.remoteJid;
 
     if (!user.conversationStarted || !quotedMsg) return;
-
-    // Process reply
 
     await this.processMessage(sock, message, [message.message.conversation], user, quotedMsg);
 
