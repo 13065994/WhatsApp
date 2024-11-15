@@ -1,35 +1,71 @@
+const User = require('../../models/user');
+
 module.exports = {
-    name: 'ban',
-    description: 'Ban a user from using the bot',
-    usage: '!ban @user [reason]',
-    category: 'admin',
-    adminOnly: true,
-    async execute(sock, message, args) {
-        const User = require('../../models/user');
-        
-        const mentioned = message.message.extendedTextMessage?.contextInfo?.mentionedJid[0];
-        if (!mentioned) {
-            await sock.sendMessage(message.key.remoteJid, { text: '❌ Please mention a user to ban' });
-            return;
-        }
 
-        const user = await User.findOne({ jid: mentioned });
-        if (!user) {
-            await sock.sendMessage(message.key.remoteJid, { text: '❌ User not found in database' });
-            return;
-        }
+  name: 'unban',
 
-        if (user.isAdmin) {
-            await sock.sendMessage(message.key.remoteJid, { text: '❌ Cannot ban an admin' });
-            return;
-        }
+  description: 'Unban a user from using the bot',
 
-        user.isBanned = true;
-        user.banReason = args.slice(1).join(' ') || 'No reason provided';
-        await user.save();
+  usage: '!unban @user [reason]',
 
-        await sock.sendMessage(message.key.remoteJid, { 
-            text: `✅ Successfully banned ${user.name}\nReason: ${user.banReason}` 
-        });
+  category: 'admin',
+
+  adminOnly: true,
+
+  async execute(sock, message, args) {
+
+    const mentions = message.message.extendedTextMessage?.contextInfo?.mentionedJid || [];
+
+    if (mentions.length === 0) {
+
+      await sock.sendMessage(message.key.remoteJid, { text: '❌ Please mention a user to unban' });
+
+      return;
+
     }
+
+    const targetId = mentions[0];
+
+    const reason = args.slice(1).join(' ') || 'No reason provided';
+
+    const user = await User.findOne({ jid: targetId });
+
+    if (!user) {
+
+      await sock.sendMessage(message.key.remoteJid, { text: '❌ User not found in database' });
+
+      return;
+
+    }
+
+    if (!user.isBanned) {
+
+      await sock.sendMessage(message.key.remoteJid, { text: '❌ User is not banned' });
+
+      return;
+
+    }
+
+    await user.unban();
+
+    await sock.sendMessage(message.key.remoteJid, { 
+
+      text: `✅ Unbanned user @${targetId.split('@')[0]}\nReason: ${reason}`, 
+
+      mentions: [targetId] 
+
+    });
+
+    try {
+
+      await sock.sendMessage(targetId, { 
+
+        text: `You have been unbanned from using the bot.\nReason: ${reason}` 
+
+      });
+
+    } catch (error) {}
+
+  }
+
 };
