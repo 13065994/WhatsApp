@@ -18,21 +18,18 @@ module.exports = {
         if (!action || !args[1]) {
             return await sock.sendMessage(remoteJid, {
                 text: "❌ Please provide both action (-v or -a) and video link/keyword",
-                quoted: message
-            });
+                }, { quoted: message });
         }
 
         if (action !== '-v' && action !== '-a') {
             return await sock.sendMessage(remoteJid, {
                 text: "❌ Invalid action. Use -v for video or -a for audio",
-                quoted: message
-            });
+                }, { quoted: message });
         }
 
         const processingMsg = await sock.sendMessage(remoteJid, {
             text: "🔄 Processing your request...",
-            quoted: message
-        });
+            }, { quoted: message });
 
         const checkurl = /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|shorts\/))((\w|-){11})(?:\S+)?$/;
 
@@ -74,8 +71,7 @@ module.exports = {
                 caption: `🎵 Title: ${title}\n📊 Quality: ${quality}`,
                 [format === 'mp4' ? 'video' : 'audio']: fs.readFileSync(filePath),
                 mimetype: format === 'mp4' ? 'video/mp4' : 'audio/mpeg',
-                quoted: message
-            });
+                }, { quoted: message });
 
             if (fs.existsSync(filePath)) {
                 fs.unlinkSync(filePath);
@@ -83,8 +79,7 @@ module.exports = {
         } catch (error) {
             await sock.sendMessage(remoteJid, {
                 text: `❌ Error: ${error.message}`,
-                quoted: message
-            });
+                }, { quoted: message });
         }
     }
 };
