@@ -8,7 +8,7 @@ const timeout = require('timeout');
 const genAI = new GoogleGenerativeAI('AIzaSyAkq3h7r2VN_LKJxc01jK9jslW8zzhlkuM');
 const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
 const visionClient = new ImageAnnotatorClient();
-const BOT_NUMBER = '2348120307870@s.whatsapp.net';
+const BOT_NUMBER = ${config.bot.botName};
 
 module.exports = {
   name: 'gemini',
