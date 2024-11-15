@@ -18,6 +18,8 @@ Platform: ${os.platform()}
 Users: ${users}
 Banned: ${bannedUsers}`;
 
-        await sock.sendMessage(sender, { text: stats });
+        await sock.sendMessage(sender, {
+     text: stats
+ }, { quoted: message });
     }
 };
