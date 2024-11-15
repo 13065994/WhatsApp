@@ -12,7 +12,7 @@ module.exports = {
         if (!args.length) {
             return await sock.sendMessage(message.key.remoteJid, {
                 text: "Please provide a word to look up."
-            });
+            }, { quoted: message });
         }
 
         const word = args[0];
@@ -36,11 +36,11 @@ module.exports = {
 
             await sock.sendMessage(message.key.remoteJid, {
                 text: definition
-            });
+            }, { quoted: message });
         } catch (error) {
             await sock.sendMessage(message.key.remoteJid, {
                 text: "Word not found or an error occurred."
-            });
+            }, { quoted: message });
         }
     }
 }
