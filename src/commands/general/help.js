@@ -100,12 +100,12 @@ ${command.aliases ? `┃ 🔄 *Aliases:* ${command.aliases.join(', ')}\n` : ''}$
                 await sock.sendMessage(message.key.remoteJid, {
                     image: botImage,
                     caption: helpText
-                });
+                }, { quoted: message });
             }
         } catch (error) {
             await sock.sendMessage(message.key.remoteJid, { 
                 text: "Error loading menu\n" + error
-            });
+            }, { quoted: message });
         }
     }
 };
