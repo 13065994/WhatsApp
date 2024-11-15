@@ -14,7 +14,7 @@ module.exports = {
             if (!prompt) {
                 return await sock.sendMessage(message.key.remoteJid, {
                     text: "Please add some prompts"
-                });
+                }, { quoted: message });
             }
 
             const startTime = new Date().getTime();
@@ -42,13 +42,13 @@ module.exports = {
                 await sock.sendMessage(message.key.remoteJid, {
                     image: fs.readFileSync(filePath),
                     caption: `Here is your generated image\n\n📝 𝗽𝗿𝗼𝗺𝗽𝘁: ${prompt}\n👑 𝗧𝗮𝗸𝗲𝗻 𝗧𝗶𝗺𝗲: ${timeTaken} seconds`
-                });
+                }, { quoted: message });
                 fs.unlinkSync(filePath);
             });
         } catch (error) {
             await sock.sendMessage(message.key.remoteJid, {
                 text: "An error occurred while generating the image."
-            });
+            }, { quoted: message });
         }
     }
 }
