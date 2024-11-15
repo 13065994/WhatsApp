@@ -60,7 +60,8 @@ const config = {
         version: "2.0.0",
         prefix: ".",
         sessionName: "nexus-session",
-        ownerNumber: ["2347075663318@s.whatsapp.net", "265993702468@s.whatsapp.net",], //add owmer numbers in here
+        ownerNumber: ["FIRST_OWNER_NUMBER@s.whatsapp.net", "SECOND_OWNER_NUMBER@s.whatsapp.net",], //add owmer numbers in here with country code e.g 234xxxxxxxxx@s.whatsapp.net
+        botNumber: "BOT_NUMBER@s.whatsapp.net",//add bot number here
         ownerName: "NexusCoders",
         language: "en",
         timezone: "Asia/Kolkata",
