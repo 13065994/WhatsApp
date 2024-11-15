@@ -34,11 +34,11 @@ module.exports = {
             await sock.sendMessage(message.key.remoteJid, {
                 text: profileText,
                 mentions: [targetJid]
-            });
+            }, { quoted: message });
         } catch (error) {
             await sock.sendMessage(message.key.remoteJid, {
                 text: '❌ Failed to fetch profile!'
-            });
+            }, { quoted: message });
         }
     }
 };
