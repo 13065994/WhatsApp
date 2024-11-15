@@ -33,11 +33,11 @@ module.exports = {
 
             await sock.sendMessage(message.key.remoteJid, {
                 text: messageText
-            });
+            }, { quoted: message });
         } catch (error) {
             await sock.sendMessage(message.key.remoteJid, {
                 text: "An error occurred while fetching the quote."
-            });
+            }, { quoted: message });
         }
     }
 };
