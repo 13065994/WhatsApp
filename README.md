@@ -67,7 +67,7 @@ npm install && npm run build
 ## 🎯 Get Session
 
 Visit our session generator to get your WhatsApp session:
-[Session Generator](https://your-session-generator-url.com)
+[Session Generator](https://nexuscoderssessionid-zni8.onrender.com)
 
 ## 📚 Command Examples
 
