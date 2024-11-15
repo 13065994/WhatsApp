@@ -43,6 +43,8 @@ module.exports = {
 ║ 
 ╚══════════════════╝`;
 
-        await sock.sendMessage(msg.key.remoteJid, { text: info });
+        await sock.sendMessage(msg.key.remoteJid, { 
+   text: info 
+ }, { quoted: message });
     }
 };
