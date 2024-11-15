@@ -11,7 +11,7 @@ module.exports = {
         if (!args.length) {
             return await sock.sendMessage(message.key.remoteJid, {
                 text: "Please provide a prompt."
-            });
+            }, { quoted: message });
         }
 
         const prompt = args.join(" ");
@@ -36,7 +36,7 @@ module.exports = {
         } catch (error) {
             await sock.sendMessage(message.key.remoteJid, {
                 text: "Failed to generate image."
-            });
+            }, { quoted: message });
         }
     }
 }
