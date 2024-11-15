@@ -12,7 +12,7 @@ module.exports = {
         if (mentions.length === 0) {
             await sock.sendMessage(message.key.remoteJid, {
                 text: '❌ Please mention a user to ban'
-            });
+            }, { quoted: message });
             return;
         }
 
@@ -23,14 +23,14 @@ module.exports = {
         if (!user) {
             await sock.sendMessage(message.key.remoteJid, {
                 text: '❌ User not found in database'
-            });
+            }, { quoted: message });
             return;
         }
 
         if (user.isAdmin) {
             await sock.sendMessage(message.key.remoteJid, {
                 text: '❌ Cannot ban an admin'
-            });
+            }, { quoted: message });
             return;
         }
 
@@ -39,12 +39,12 @@ module.exports = {
         await sock.sendMessage(message.key.remoteJid, {
             text: `✅ Banned user @${targetId.split('@')[0]}\nReason: ${reason}`,
             mentions: [targetId]
-        });
+        }, { quoted: message });
 
         try {
             await sock.sendMessage(targetId, {
                 text: `You have been banned from using the bot.\nReason: ${reason}`
-            });
+            }, { quoted: message });
         } catch (error) {}
     }
 };
