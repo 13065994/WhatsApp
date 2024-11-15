@@ -12,8 +12,7 @@ module.exports = {
         if (args.length === 0) {
             return await sock.sendMessage(message.key.remoteJid, {
                 text: "Please provide a song name to search for.",
-                quoted: message
-            });
+                }, { quoted: message });
         }
 
         const query = args.join(" ");
@@ -28,8 +27,7 @@ module.exports = {
             if (tracks.length === 0) {
                 return await sock.sendMessage(message.key.remoteJid, {
                     text: "No tracks found. Please try a different search query.",
-                    quoted: message
-                });
+                    }, { quoted: message });
             }
 
             const track = tracks[0];
@@ -38,8 +36,7 @@ module.exports = {
             if (!previewUrl) {
                 return await sock.sendMessage(message.key.remoteJid, {
                     text: "Sorry, preview not available for this track.",
-                    quoted: message
-                });
+                    }, { quoted: message });
             }
 
             const audioResponse = await axios.get(previewUrl, {
@@ -56,14 +53,12 @@ module.exports = {
                         `⏱ Duration: ${formatDuration(durationMs)}\n` +
                         `🔗 Spotify URL: ${spotifyUrl}\n\n` +
                         `📨 30-second preview`,
-                quoted: message
-            });
+                }, { quoted: message });
         } catch (error) {
             console.error(error);
             await sock.sendMessage(message.key.remoteJid, {
                 text: "An error occurred while processing your request. Please try again later.",
-                quoted: message
-            });
+                }, { quoted: message });
         }
     }
 };
