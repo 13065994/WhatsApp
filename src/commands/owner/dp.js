@@ -23,14 +23,14 @@ module.exports = {
       const quotedMessage = message.message.extendedTextMessage?.contextInfo?.quotedMessage;
 
       if (!quotedMessage) {
-        await sock.sendMessage(chatId, { text: '❌ Please reply to an image with this command!', quoted: message });
+        await sock.sendMessage(chatId, { text: '❌ Please reply to an image with this command!' }, { quoted: message });
         return;
       }
 
       const imageMessage = quotedMessage.imageMessage;
 
       if (!imageMessage) {
-        await sock.sendMessage(chatId, { text: '❌ Please reply to an image!', quoted: message });
+        await sock.sendMessage(chatId, { text: '❌ Please reply to an image!'}, { quoted: message });
         return;
       }
 
@@ -38,10 +38,10 @@ module.exports = {
       const buffer = await streamToBuffer(stream);
 
       await sock.updateProfilePicture(sock.user.id, buffer);
-      await sock.sendMessage(chatId, { text: '✅ Successfully updated bot\'s display picture!', quoted: message });
+      await sock.sendMessage(chatId, { text: '✅ Successfully updated bot\'s display picture!'}, { quoted: message });
     } catch (error) {
       logger.error('Error in dp command:', error);
-      await sock.sendMessage(message.key.remoteJid, { text: '❌ An error occurred while updating the display picture.', quoted: message });
+      await sock.sendMessage(message.key.remoteJid, { text: '❌ An error occurred while updating the display picture.' }, { quoted: message });
     }
   }
 };
