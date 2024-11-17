@@ -2,7 +2,7 @@
   
 # 🤖 NexusCoders Bot
 
-*A powerful, feature-rich WhatsApp bot created by Nexus Teams*
+*A powerful, feature-rich WhatsApp bot created by Nexus Team*
 
 [<img src="https://img.shields.io/badge/DEPLOY-HEROKU-red.svg?style=for-the-badge&logo=heroku" width="200" height="35.45"/>](https://heroku.com/deploy)
 [<img src="https://img.shields.io/badge/DEPLOY-RENDER-blue.svg?style=for-the-badge&logo=render" width="200" height="35.45"/>](https://render.com)
