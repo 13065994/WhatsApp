@@ -26,13 +26,13 @@ module.exports = {
     // Validate filename
     if (!filename.endsWith('.js')) {
       return await sock.sendMessage(message.key.remoteJid, {
-        text: '🛑Filename must end with .js',
+        text: 'Filename must end with .js',
       }, { quoted: message });
     }
 
     // Ask user to select folder
-    const folders = ['admin', 'fun', 'general', 'owner', 'utility'];
-    const folderMessage = `Select folder by number:\n1. Admin\n2. Fun\n3. General\n4. Owner\n5. Utility`;
+    const folders = ['admin', 'fun', 'general', 'owner', 'utility', 'Ai', 'media'];
+    const folderMessage = `Select folder:\n1. Admin\n2. Fun\n3. General\n4. Owner\n5. Utility\n6. Ai\n7. media`;
     await sock.sendMessage(message.key.remoteJid, {
       text: folderMessage,
     }, { quoted: message });
@@ -54,9 +54,9 @@ module.exports = {
     // Validate user's reply
     if (replyData.step === 1) {
       const folderSelection = parseInt(replyText);
-      if (isNaN(folderSelection) || folderSelection < 1 || folderSelection > 5) {
+      if (isNaN(folderSelection) || folderSelection < 1 || folderSelection > 7) {
         return await sock.sendMessage(chatId, {
-          text: '🚨Invalid selection. Please reply with a number between 1 and 5.',
+          text: 'Invalid selection. Please reply with a number between 1 and 7.',
         }, { quoted: message });
       }
 
@@ -70,7 +70,7 @@ module.exports = {
       // Check if file exists
       if (!fs.existsSync(filePath)) {
         return await sock.sendMessage(chatId, {
-          text: `☪️File not found: ${selectedFolder}/${filename}`,
+          text: `File not found: ${selectedFolder}/${filename}`,
         }, { quoted: message });
       }
 
