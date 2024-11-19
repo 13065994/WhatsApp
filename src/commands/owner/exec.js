@@ -9,7 +9,7 @@ const exec = util.promisify(execCallback);
 
 module.exports = {
     name: 'exec',
-    aliases: ['run', 'evaluate', 'eval'],
+    aliases: ['run', 'evaluate'],
     category: 'owner',
     description: 'Execute code in multiple languages',
     usage: 'exec <language> <code>',
