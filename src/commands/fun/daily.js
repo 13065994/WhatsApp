@@ -1,7 +1,6 @@
 const { MessageType } = require('@whiskeysockets/baileys');
 const config = require('../../config');
 const logger = require('../../utils/logger');
-const { fancy } = require('../../utils/fancytext');
 
 module.exports = {
     name: 'daily',
@@ -22,7 +21,7 @@ module.exports = {
                 const minutes = Math.floor((timeLeft % 3600000) / 60000);
                 
                 await sock.sendMessage(chatId, {
-                    text: fancy(`⏰ 𝙋𝙡𝙚𝙖𝙨𝙚 𝙬𝙖𝙞𝙩 ${hours}h ${minutes}m 𝙛𝙤𝙧 𝙣𝙚𝙭𝙩 𝙧𝙚𝙬𝙖𝙧𝙙!`),
+                    text: `⏰ Please wait ${hours}h ${minutes}m for next reward!`,
                 }, { quoted: message });
                 return;
             }
@@ -41,23 +40,23 @@ module.exports = {
             });
 
             const responseText = `
-🎁 𝐃𝐚𝐢𝐥𝐲 𝐑𝐞𝐰𝐚𝐫𝐝𝐬!
+🎁 DAILY REWARDS!
 ━━━━━━━━━━━━━
-⭐ 𝙍𝙚𝙬𝙖𝙧𝙙: ${coins} 𝙘𝙤𝙞𝙣𝙨
-📈 𝙎𝙩𝙧𝙚𝙖𝙠: ${user.dailyStreak + 1} 𝙙𝙖𝙮𝙨
-🎯 𝘽𝙤𝙣𝙪𝙨: ${streakBonus} 𝙘𝙤𝙞𝙣𝙨
-💰 𝙏𝙤𝙩𝙖𝙡: ${totalCoins} 𝙘𝙤𝙞𝙣𝙨
+⭐ Reward: ${coins} coins
+📈 Streak: ${user.dailyStreak + 1} days
+🎯 Bonus: ${streakBonus} coins
+💰 Total: ${totalCoins} coins
 ━━━━━━━━━━━━━
-🏦 𝘽𝙖𝙡𝙖𝙣𝙘𝙚: ${user.coins + totalCoins} 𝙘𝙤𝙞𝙣𝙨`;
+🏦 Balance: ${user.coins + totalCoins} coins`;
 
             await sock.sendMessage(chatId, {
-                text: fancy(responseText),
+                text: responseText,
             }, { quoted: message });
 
         } catch (error) {
             logger.error(`Error in daily command:`, error);
             await sock.sendMessage(chatId, {
-                text: fancy('❌ 𝘼𝙣 𝙚𝙧𝙧𝙤𝙧 𝙤𝙘𝙘𝙪𝙧𝙧𝙚𝙙!'),
+                text: '❌ An error occurred!',
             }, { quoted: message });
         }
     }
