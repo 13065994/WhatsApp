@@ -111,7 +111,7 @@
     "typescript": "^5.3.3"
   },
   "engines": {
-    "node": "18.x"
+    "node": "21.x"
   },
   "repository": {
     "type": "git",
